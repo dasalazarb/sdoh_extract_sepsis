@@ -78,12 +78,13 @@ def bloque3(model_id, tokenizer, model):
     subject_and_hadm_ids = pd.read_csv(
         # '/data/salazarda/data/sdoh/SDOH_MIMICIII_physio_release.csv'
         # '/data/salazarda/data/sdoh/temp_notes_filtered_ids_more_than_one_cc.csv'
-        '/data/salazarda/data/sdoh/archivos_sin_texto_primeras_20_palabras.csv'
+        # '/data/salazarda/data/sdoh/archivos_sin_texto_primeras_20_palabras.csv'
+        '/data/salazarda/data/sdoh/outputs/PEND_keys_gpt-oss_no_en_all_notes.csv'
     )
     # subject_and_hadm_ids = pd.read_csv('C:/Users/salazarda/Downloads/SDOH_MIMICIII_physio_release.csv')
     # subject_and_hadm_ids = list(subject_and_hadm_ids.loc[:,['patient_id', 'note_id']].drop_duplicates().itertuples(index=False, name=None))
     subject_and_hadm_ids = list(subject_and_hadm_ids.loc[:,['subject_id', 'hadm_id', 'note_id']].drop_duplicates().itertuples(index=False, name=None))
-    subject_and_hadm_ids = subject_and_hadm_ids[3200:4550]  # DEBUG opcional
+    subject_and_hadm_ids = subject_and_hadm_ids[1600:]  # DEBUG opcional
 
     # notes = ul.get_clinical_notes_mimic3(subject_and_hadm_ids)
     # notes = ul.get_clinical_notes_mimic4(subject_and_hadm_ids)

@@ -66,12 +66,13 @@ def bloque3(model_id, tokenizer, model, pipe):
     subject_and_hadm_ids = pd.read_csv(
         # '/data/salazarda/data/sdoh/SDOH_MIMICIII_physio_release.csv'
         # '/data/salazarda/data/sdoh/temp_notes_filtered_ids.csv'
-        '/data/salazarda/data/sdoh/archivos_sin_texto_primeras_20_palabras.csv'
+        # '/data/salazarda/data/sdoh/archivos_sin_texto_primeras_20_palabras.csv'
+        '/data/salazarda/data/sdoh/outputs/PEND_keys_DeepSeek_no_en_all_notes.csv'
     )
     # subject_and_hadm_ids = pd.read_csv('C:/Users/salazarda/Downloads/SDOH_MIMICIII_physio_release.csv')
     # subject_and_hadm_ids = list(subject_and_hadm_ids.loc[:,['patient_id', 'note_id']].drop_duplicates().itertuples(index=False, name=None))
     subject_and_hadm_ids = list(subject_and_hadm_ids.loc[:,['subject_id', 'hadm_id', 'note_id']].drop_duplicates().itertuples(index=False, name=None))
-    subject_and_hadm_ids = subject_and_hadm_ids[4480:4550]  # DEBUG opcional
+    subject_and_hadm_ids = subject_and_hadm_ids[:]  # DEBUG opcional
     
     # === Obtener notas clínicas ===
     # notes = ul.get_clinical_notes_mimic3(subject_and_hadm_ids)
