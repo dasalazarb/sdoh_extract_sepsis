@@ -23,6 +23,27 @@ At a high level, the workflow is:
 
 ---
 
+## End-to-end pipeline order
+
+The primary analysis pipeline proceeds in this order:
+
+1. **LLM inference generation**
+   - Python inference scripts: `gpt_oss_sdoh.py`, `mistral_sdoh.py`, `deepseek_sdoh.py`
+   - SLURM wrappers: `run_gptoss_mimic4.sh`, `run_mistral_mimic4.sh`, `run_deepseek_mimic4.sh`
+2. **Extraction + strata build from LLM outputs**
+   - Run inference outputs through `utils_llm.py` and `code_extract_results_v2.py`
+   - Build strata dataset with `code_build_sdoh_all_notes_with_llm_strata_from_extracted.py`
+3. **Clinical covariate extraction (SQL sets)**
+   - Execute `sql_set1_charlson_lookback_12mo.sql`, `sql_set2_data_sociodemo_admission.sql`,
+     `sql_set3_baseline_labs.sql`, and `sql_set4_early_interventions.sql`
+   - Assemble survival-ready dataframes with `code_get_survival_dataframes.py`
+4. **Survival modeling**
+   - Combine outputs from steps 2 and 3 in `code_cox_survival_model.py`
+5. **Results scripts**
+   - Run `code_results_*.py` scripts for metrics, descriptives, and figures.
+
+---
+
 ## Repository structure
 
 ### Core inference scripts
